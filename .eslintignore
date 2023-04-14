@@ -8,3 +8,5 @@ dist
 *.md
 *.log
 *.lock
+
+config-overrides.js
