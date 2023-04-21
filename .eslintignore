@@ -9,4 +9,4 @@ dist
 *.log
 *.lock
 
-config-overrides.js
+craco.config.js

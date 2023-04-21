@@ -18,9 +18,9 @@
     "web-vitals": "^2.1.0"
   },
   "scripts": {
-    "start": "react-app-rewired start",
-    "build": "react-app-rewired build",
-    "test": "react-app-rewired test",
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test",
     "eject": "react-scripts eject",
     "lint": "eslint . --ext js,ts,tsx",
     "format": "prettier --write **/*.{js,ts,tsx} && eslint . --ext js,ts,tsx --fix"
@@ -44,14 +44,14 @@
     ]
   },
   "devDependencies": {
+    "@craco/craco": "^7.1.0",
     "@typescript-eslint/eslint-plugin": "^5.58.0",
     "@typescript-eslint/parser": "^5.58.0",
-    "customize-cra": "^1.0.0",
+    "craco-less": "^2.0.0",
     "eslint": "^8.38.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.32.2",
-    "prettier": "2.8.7",
-    "react-app-rewired": "^2.2.1"
+    "prettier": "2.8.7"
   }
 }
