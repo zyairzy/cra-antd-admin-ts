@@ -1,11 +1,12 @@
-import { Button } from 'antd';
 import './App.less';
+import { HashRouter as Router } from 'react-router-dom';
+import RenderRouter from './routes';
 
 function App() {
   return (
-    <div>
-      <Button type="primary">Learn React</Button>
-    </div>
+    <Router>
+      <RenderRouter></RenderRouter>
+    </Router>
   );
 }
 

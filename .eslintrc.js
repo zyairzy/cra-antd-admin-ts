@@ -23,5 +23,10 @@ module.exports = {
   rules: {
     'react/react-in-jsx-scope': 'off',
     'react/jsx-uses-react': 'off',
+    // semi: ['error', 'never'],
+    // quotes: [2, 'single'],
+    'prettier/prettier': ['error', { parser: 'typescript' }],
+    '@typescript-eslint/no-explicit-any': 'off',
+    '@typescript-eslint/no-empty-function': 'off',
   },
 };
