@@ -1,5 +1,6 @@
 import { Button, Result } from 'antd';
 import { useNavigate } from 'react-router-dom';
+import { FormattedMessage } from 'react-intl';
 
 const NotFoundPage = () => {
   const navigate = useNavigate();
@@ -7,10 +8,10 @@ const NotFoundPage = () => {
     <Result
       status="404"
       title="404"
-      subTitle="not found"
+      subTitle={<FormattedMessage id="page.404.subtitle" />}
       extra={
         <Button type="primary" onClick={() => navigate('/')}>
-          Not Found
+          <FormattedMessage id="page.404.btn" />
         </Button>
       }
     ></Result>
