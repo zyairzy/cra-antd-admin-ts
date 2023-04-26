@@ -4,6 +4,7 @@ import App from './App';
 import { Provider } from 'react-redux';
 import store from './stores';
 import reportWebVitals from './reportWebVitals';
+import './mock';
 
 ReactDOM.render(
   <React.StrictMode>

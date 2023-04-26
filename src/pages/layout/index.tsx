@@ -5,7 +5,6 @@ import HeaderComponent from './header';
 import MenuComponent from './menu';
 import BreadcrumbComponent from './breadcrumb';
 
-// import { getGlobalState } from 'utils/getGloabal';
 import SuspendFallbackLoading from './suspendFallbackLoading';
 import { getMenuList } from 'apis/layout';
 import { MenuList, MenuChild } from 'interface/layout/menu.interface';
@@ -51,8 +50,8 @@ const LayoutPage = () => {
   };
 
   const fetchMenuList = useCallback(async () => {
-    // const { status, result } = await getMenuList();
-    const result = getMenuList;
+    const { status, result } = await getMenuList();
+    // const result = getMenuList;
     setMenuList(result);
     if (status) {
       setMenuList(result);
@@ -65,7 +64,6 @@ const LayoutPage = () => {
 
   useEffect(() => {
     window.onresize = () => {
-      // const { device } = getGlobalState();
       const device = 'DESKTOP';
       const rect = document.body.getBoundingClientRect();
       const needCollapse = rect.width < WIDTH;
