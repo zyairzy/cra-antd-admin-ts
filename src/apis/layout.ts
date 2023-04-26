@@ -4,18 +4,18 @@ export const getMenuList: MenuList = [
   {
     name: 'account',
     label: {
-      zh_CN: '账号管理',
-      en_US: 'Account',
+      zh: '账号管理',
+      en: 'Account',
     },
-    icon: 'account',
+    icon: 'UserOutlined',
     key: '0',
     path: '/account',
   },
   {
     name: 'edit',
     label: {
-      zh_CN: '账号详情',
-      en_US: 'Account Details',
+      zh: '账号详情',
+      en: 'Account Details',
     },
     key: '1-0',
     path: '/account/edit',
@@ -24,18 +24,18 @@ export const getMenuList: MenuList = [
   {
     name: 'application',
     label: {
-      zh_CN: '应用管理',
-      en_US: 'application',
+      zh: '应用管理',
+      en: 'Application',
     },
-    icon: 'application',
+    icon: 'AppstoreOutlined',
     key: '1',
     path: '/application',
     children: [
       {
         name: 'application1',
         label: {
-          zh_CN: '应用1',
-          en_US: 'APP1',
+          zh: '应用1',
+          en: 'APP1',
         },
         key: '1-0',
         path: '/application/app1',
@@ -43,8 +43,8 @@ export const getMenuList: MenuList = [
       {
         name: 'application2',
         label: {
-          zh_CN: '应用2',
-          en_US: 'APP2',
+          zh: '应用2',
+          en: 'APP2',
         },
         key: '1-1',
         path: '/application/app2',
@@ -54,10 +54,10 @@ export const getMenuList: MenuList = [
   {
     name: 'log',
     label: {
-      zh_CN: '日志管理',
-      en_US: 'Log',
+      zh: '日志管理',
+      en: 'Log',
     },
-    icon: 'log',
+    icon: 'TableOutlined',
     key: '2',
     path: '/log',
   },

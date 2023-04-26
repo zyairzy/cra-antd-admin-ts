@@ -1,8 +1,9 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Menu } from 'antd';
 import { MenuList } from '@/interface/layout/menu.interface';
 import { useNavigate, useLocation } from 'react-router-dom';
-// import { CustomIcon } from './customIcon';
+import DynamicIcon from './dynamicIcon';
+import { useAppSelector } from '@/stores/useReduxHook';
 
 const { SubMenu, Item } = Menu;
 
@@ -13,7 +14,8 @@ interface MenuProps {
 const MenuComponent = ({ menuList }: MenuProps) => {
   const [openKeys, setOpenkeys] = useState<string[]>([]);
   const [selectedKeys, setSelectedKeys] = useState<string[]>([]);
-  const { collapsed, device, locale } = { collapsed: false, device: 'DESKTOP', locale: 'zh_CN' };
+  const { collapsed, device } = { collapsed: false, device: 'DESKTOP' };
+  const locale = useAppSelector(state => state.appGlobal.locale);
 
   const navigate = useNavigate();
   const { pathname } = useLocation();
@@ -21,7 +23,7 @@ const MenuComponent = ({ menuList }: MenuProps) => {
   const getTitie = (menu: MenuList[0]) => {
     return (
       <span style={{ display: 'flex', alignItems: 'center' }}>
-        {/* <CustomIcon type={menu.icon!} /> */}
+        {/* <DynamicIcon type={menu.icon} style={{ fontSize: 16 }} /> */}
         <span>{menu.label[locale]}</span>
       </span>
     );
@@ -57,9 +59,11 @@ const MenuComponent = ({ menuList }: MenuProps) => {
       onOpenChange={onOpenChange as any}
       className="layout-page-sider-menu"
     >
-      {menuList?.map(menu =>
-        menu.children ? (
-          <SubMenu key={menu.path} title={getTitie(menu)}>
+      {menuList?.map(menu => {
+        const menuIcon = menu.icon ? <DynamicIcon type={menu.icon} style={{ fontSize: 16 }} /> : null;
+
+        return menu.children ? (
+          <SubMenu key={menu.path} title={getTitie(menu)} icon={menuIcon}>
             {menu.children.map(child => {
               if (!child.hidden) {
                 return (
@@ -71,11 +75,11 @@ const MenuComponent = ({ menuList }: MenuProps) => {
             })}
           </SubMenu>
         ) : !menu.hidden ? (
-          <Item key={menu.path} onClick={() => onMenuClick(menu)}>
+          <Item key={menu.path} icon={menuIcon} onClick={() => onMenuClick(menu)}>
             {getTitie(menu)}
           </Item>
-        ) : null
-      )}
+        ) : null;
+      })}
     </Menu>
   );
 };

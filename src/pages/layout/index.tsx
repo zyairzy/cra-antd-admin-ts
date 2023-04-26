@@ -10,13 +10,17 @@ import SuspendFallbackLoading from './suspendFallbackLoading';
 import { getMenuList } from 'apis/layout';
 import { MenuList, MenuChild } from 'interface/layout/menu.interface';
 import { Outlet, useLocation, useNavigate } from 'react-router';
+import { useAppSelector, useAppDispatch } from '@/stores/useReduxHook';
+import { setCollapsed } from '@/stores/slicers/global';
 
 const { Sider, Content } = Layout;
 const WIDTH = 992;
 
 const LayoutPage = () => {
   const [menuList, setMenuList] = useState<MenuList>([]);
-  const { device, collapsed, newUser } = { device: 'DESKTOP', collapsed: false, newUser: {} }; // get from redux
+  const { device, newUser } = { device: 'DESKTOP', newUser: {} }; // get from redux
+  const collapsed = useAppSelector(state => state.appGlobal.collapsed);
+  const dispatch = useAppDispatch();
   const isMobile = device === 'MOBILE';
 
   const location = useLocation();
@@ -28,7 +32,9 @@ const LayoutPage = () => {
     }
   }, [navigate, location]);
 
-  const toggle = () => {};
+  const toggle = () => {
+    dispatch(setCollapsed(!collapsed));
+  };
 
   const initMenuListAll = (menu: MenuList) => {
     const MenuListAll: MenuChild[] = [];
@@ -63,12 +69,13 @@ const LayoutPage = () => {
       const device = 'DESKTOP';
       const rect = document.body.getBoundingClientRect();
       const needCollapse = rect.width < WIDTH;
+      dispatch(setCollapsed(needCollapse));
     };
-  }, []);
+  }, [dispatch]);
 
   return (
     <Layout className="layout-page">
-      <HeaderComponent collapsed={collapsed} toggle={null} />
+      <HeaderComponent collapsed={collapsed} toggle={toggle} />
       <Layout>
         {!isMobile ? (
           <Sider
@@ -87,7 +94,7 @@ const LayoutPage = () => {
             placement="left"
             bodyStyle={{ padding: 0, height: '100%' }}
             closable={false}
-            // onClose={toggle}
+            onClose={toggle}
             visible={!collapsed}
           >
             <MenuComponent menuList={menuList} />

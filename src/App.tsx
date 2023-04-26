@@ -7,9 +7,10 @@ import enUS from 'antd/lib/locale/en_US';
 
 import { IntlProvider } from 'react-intl';
 import { localeConfig } from './locales';
+import { useAppSelector } from '@/stores/useReduxHook';
 
 function App() {
-  const locale = 'zh';
+  const locale = useAppSelector(state => state.appGlobal.locale);
 
   const getAntdLocale = () => {
     if (locale === 'zh') {

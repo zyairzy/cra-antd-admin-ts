@@ -7,6 +7,8 @@ import {
 } from '@ant-design/icons';
 import { Layout, Dropdown, Menu } from 'antd';
 import { useNavigate } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '@/stores/useReduxHook';
+import { setGlobalLocale } from '@/stores/slicers/global';
 
 import ReactSvg from 'assets/logo/react.svg';
 import AntdSvg from 'assets/logo/antd.svg';
@@ -21,7 +23,9 @@ interface HeaderProps {
 type Action = 'userInfo' | 'userSetting' | 'logout';
 
 const HeaderComponent = ({ collapsed, toggle }: HeaderProps) => {
-  const { logged, locale, device } = { logged: true, locale: 'zh_CN', device: 'DESKTOP' }; //TODO: get from redux
+  const { logged, device } = { logged: true, device: 'DESKTOP' }; //TODO: get from redux
+  const locale = useAppSelector(state => state.appGlobal.locale);
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   const onActionClick = async (action: Action) => {
@@ -42,8 +46,9 @@ const HeaderComponent = ({ collapsed, toggle }: HeaderProps) => {
     navigate('/login');
   };
 
-  const selectLocale = ({ key }: { key: any }) => {
+  const selectLocale = ({ key }: { key: string }) => {
     localStorage.setItem('locale', key);
+    dispatch(setGlobalLocale(key));
   };
   const menu = (
     <Menu>
@@ -79,10 +84,10 @@ const HeaderComponent = ({ collapsed, toggle }: HeaderProps) => {
             trigger={['click']}
             overlay={
               <Menu onClick={selectLocale}>
-                <Menu.Item style={{ textAlign: 'left' }} disabled={locale === 'zh_CN'} key="zh_CN">
+                <Menu.Item style={{ textAlign: 'left' }} disabled={locale === 'zh'} key="zh">
                   简体中文
                 </Menu.Item>
-                <Menu.Item style={{ textAlign: 'left' }} disabled={locale === 'en_US'} key="en_US">
+                <Menu.Item style={{ textAlign: 'left' }} disabled={locale === 'en'} key="en">
                   English
                 </Menu.Item>
               </Menu>

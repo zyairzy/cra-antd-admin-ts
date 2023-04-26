@@ -1,8 +1,8 @@
 interface MenuItem {
   name: string; //menu item name
   label: {
-    zh_CN: string;
-    en_US: string;
+    zh: string;
+    en: string;
   };
   icon?: string; //child menu not need icon
   key: string; //menu id
