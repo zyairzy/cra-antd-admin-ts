@@ -5,7 +5,7 @@ const mockMenuList: MenuList = [
   {
     name: 'account',
     label: {
-      zh: '账号管理1',
+      zh: '账号管理',
       en: 'Account',
     },
     icon: 'UserOutlined',
@@ -25,7 +25,7 @@ const mockMenuList: MenuList = [
   {
     name: 'application',
     label: {
-      zh: '应用管理2',
+      zh: '应用管理',
       en: 'Application',
     },
     icon: 'AppstoreOutlined',

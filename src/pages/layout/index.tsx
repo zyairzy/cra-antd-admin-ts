@@ -50,12 +50,8 @@ const LayoutPage = () => {
   };
 
   const fetchMenuList = useCallback(async () => {
-    const { status, result } = await getMenuList();
-    // const result = getMenuList;
+    const result = await getMenuList();
     setMenuList(result);
-    if (status) {
-      setMenuList(result);
-    }
   }, []);
 
   useEffect(() => {

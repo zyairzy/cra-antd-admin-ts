@@ -1,6 +1,7 @@
 export interface PageData<T> {
-  pageNum: number;
-  pageSize: number;
-  total: number;
-  data: T[];
+  current: number; // 当前页
+  size: number; // 每页大小
+  total: number; // 总数
+  pages?: number; // 总页数
+  records: T[];
 }

@@ -1,5 +1,4 @@
 import Mock from 'mockjs';
-import { Response } from '../apis/request';
 import { PageData } from 'interface';
 import { getTableData } from 'utils/get-table-page-data';
 
@@ -14,24 +13,16 @@ interface PageParams {
   pageNum?: number;
 }
 
-export function intercepter<T>(data: T): Response<T>;
-export function intercepter<T extends any[]>(data: T, page: PageParams): Response<PageData<T>>;
+export function intercepter<T>(data: T): T;
+export function intercepter<T extends any[]>(data: T, page: PageParams): PageData<T>;
 
 export function intercepter(data: any, page?: PageParams) {
   if (page) {
     const result = getTableData(Number(page.pageNum), Number(page.pageSize), data);
 
-    return {
-      status: true,
-      message: '成功',
-      result,
-    };
+    return result;
   } else {
-    return {
-      status: true,
-      message: '成功',
-      result: data,
-    };
+    return data;
   }
 }
 

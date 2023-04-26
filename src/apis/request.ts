@@ -90,10 +90,4 @@ service.interceptors.response.use(
   }
 );
 
-export default service;
-
-export type Response<T = any> = {
-  status: boolean;
-  message: string;
-  result: T;
-};
+export default service.request;

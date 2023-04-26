@@ -3,11 +3,11 @@ const { createProxyMiddleware } = require('http-proxy-middleware');
 
 module.exports = function (app) {
   app.use(
-    '/api/v1',
+    '/mock/api/v1',
     createProxyMiddleware({
       target: 'http://localhost:4523',
       changeOrigin: true,
-      pathRewrite: { '^/api/v1': '' },
+      pathRewrite: { '^/mock/api/v1': '' },
     })
   );
 };
