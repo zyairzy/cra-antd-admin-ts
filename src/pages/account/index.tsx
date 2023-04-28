@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { Button, Card } from 'antd';
+import { Button, Card, Input } from 'antd';
 import MyTable from '@/components/table';
 import { getUsers } from '@/apis/user';
 import { parseTime } from '@/utils/commonUtils';
@@ -31,7 +31,26 @@ const AccountList = () => {
   );
 
   // 搜索栏配置项
-  const searchConfigList = [];
+  const searchItemList = [
+    {
+      key: 'search',
+      slot: <Input placeholder="account/email/mobile" allowClear />,
+      rules: [],
+      initialValue: 'zzz',
+    },
+    {
+      key: 'bizType',
+      slot: <Input placeholder="application" allowClear />,
+    },
+    {
+      key: 'roleNames',
+      slot: <Input placeholder="role" allowClear />,
+    },
+  ];
+
+  const onSearchItemChange = changedField => {
+    console.log(changedField);
+  };
 
   const columns = [
     {
@@ -74,14 +93,15 @@ const AccountList = () => {
   ];
   return (
     <Card>
-      <div>{<AddBtn />}</div>
+      <div style={{ float: 'right' }}>{<AddBtn />}</div>
 
       <MyTable
         apiFun={getUsers}
         columns={columns}
         ref={tableRef}
-        searchConfigList={searchConfigList}
+        searchItemList={searchItemList}
         extraProps={{ results: 10 }}
+        onFieldsChange={onSearchItemChange}
       />
     </Card>
   );

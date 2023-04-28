@@ -1,13 +1,14 @@
 import React, { useState, forwardRef, useImperativeHandle, useRef, ReactNode } from 'react';
 import { Table } from 'antd';
 import useService from '@/hooks/tableHook';
+import SearchForm from '@/components/searchForm';
 
 /**
  * 封装列表、分页、多选、搜索组件
  * @param {RefType} ref 表格的实例，用于调用内部方法
  * @param {object[]} columns 表格列的配置
  * @param {function} apiFun 表格数据的请求方法
- * @param {object[]} searchConfigList 搜索栏配置
+ * @param {object[]} searchItemList 搜索栏配置
  * @param {function} beforeSearch 搜索前的操作（如处理一些特殊数据）
  * @param {function} onFieldsChange 处理搜索栏表单联动事件
  * @param {object} extraProps 额外的搜索参数（不在搜索配置内的）
@@ -25,7 +26,7 @@ interface TableProps {
   columns: object[];
   apiFun: (arg0?: unknown[]) => Promise<object>;
   ref?: RefType;
-  searchConfigList?: object[];
+  searchItemList?: object[];
   extraProps?: object;
   rowKey?: string;
   rowClassName?: string;
@@ -40,12 +41,11 @@ interface TableProps {
   onExpand?: () => void;
 }
 
-// eslint-disable-next-line react/display-name
 const MyTable = forwardRef((props: TableProps, ref: RefType) => {
   const {
     columns,
     apiFun,
-    searchConfigList,
+    searchItemList,
     extraProps,
     rowKey,
     rowClassName,
@@ -60,25 +60,58 @@ const MyTable = forwardRef((props: TableProps, ref: RefType) => {
     onExpand,
   } = props;
 
+  const searchForm = useRef(null);
+
+  // 搜索参数,如果有特殊需要处理的参数，就处理
+  const searchObj = searchItemList.reduce(
+    (prev: CommonObjectType, curr: CommonObjectType) =>
+      Object.assign(prev, {
+        [curr.key]: curr.fn ? curr.fn(curr.initialValue) : curr.initialValue,
+      }),
+    {}
+  );
+
   // 初始参数
   const initParams = {
+    ...searchObj,
     ...extraProps,
-    pageNum: 1,
-    pageSize: 20,
+    current: 1,
+    size: 20,
   };
 
   // 多选框的选择值
   const [selectedKeys, setSelectedKeys] = useState([]);
   // 列表所有的筛选参数（包括搜索、分页、排序等）
   const [tableParams, setTableParams] = useState(initParams);
+  // 列表搜索参数
+  const [searchParams, setSearchParams] = useState(searchObj);
   // 列表排序参数
   const [sortParams, setSortParams] = useState({});
   // 列表分页参数
-  const [curPageNo, setCurPageNo] = useState(initParams.pageNum);
-  const [curPageSize, setCurPageSize] = useState(initParams.pageSize);
+  const [curPageNo, setCurPageNo] = useState(initParams.current);
+  const [curPageSize, setCurPageSize] = useState(initParams.size);
 
   const { loading = false, response }: CommonObjectType = useService(apiFun, tableParams);
   const { records: tableData = [], total = -1 } = response || {};
+
+  // 执行搜索操作
+  const handleSearch = (val: CommonObjectType): void => {
+    setSearchParams(val);
+    setTableParams({ ...tableParams, ...val, current: 1 });
+  };
+
+  const resetAction = (page?: number): void => {
+    setSelectedKeys([]);
+    const nextPage = page || curPageNo;
+    const nextParmas = page === 1 ? {} : { ...searchParams, ...sortParams };
+    setCurPageNo(nextPage);
+    setTableParams({
+      ...initParams,
+      ...nextParmas,
+      current: nextPage,
+      size: curPageSize,
+    });
+  };
 
   // 列表复选框选中变化
   const onSelectChange = (selectedRowKeys: any[], selectedRows: any[]): void => {
@@ -112,19 +145,55 @@ const MyTable = forwardRef((props: TableProps, ref: RefType) => {
     const sortObj = sortConfig ? sortConfig(sorter) : {};
     setSortParams(sortObj);
 
-    const { current: pageNum, pageSize } = pagination;
-    setCurPageNo(pageNum);
-    setCurPageSize(pageSize);
+    const { current: current, pageSize: size } = pagination;
+    setCurPageNo(current);
+    setCurPageSize(size);
     setTableParams({
       ...initParams,
       ...sortObj,
-      pageNum,
-      pageSize,
+      current,
+      size,
     });
   };
 
+  /**
+   * @useImperativeHandle
+   * 第一个参数，接收一个通过forwardRef引用父组件的ref实例
+   * 第二个参数一个回调函数，返回一个对象,对象里面存储需要暴露给父组件的属性或方法
+   */
+  useImperativeHandle(ref, () => ({
+    // 更新列表
+    update(page?: number): void {
+      resetAction(page);
+    },
+    // 更新列表，并重置搜索字段
+    resetForm(page?: number): void {
+      if (searchForm.current) searchForm.current.resetFields();
+      setSearchParams({});
+      resetAction(page);
+    },
+    // 仅重置搜索字段
+    resetField(field?: string[]): void {
+      return field ? searchForm.current.resetFields([...field]) : searchForm.current.resetFields();
+    },
+    // 获取当前列表数据
+    getTableData(): CommonObjectType[] {
+      return tableData;
+    },
+  }));
+
   return (
     <div>
+      {searchItemList.length > 0 && (
+        <SearchForm
+          ref={searchForm}
+          searchItem={searchItemList}
+          handleSearch={handleSearch}
+          beforeSearch={beforeSearch}
+          onFieldsChange={onFieldsChange}
+          loading={loading}
+        ></SearchForm>
+      )}
       {/* 列表 */}
       <Table
         {...showCheckbox}
@@ -139,8 +208,8 @@ const MyTable = forwardRef((props: TableProps, ref: RefType) => {
         pagination={{
           size: pagationSize,
           total,
-          pageSize: tableParams.pageSize,
-          current: tableParams.pageNum,
+          pageSize: tableParams.size,
+          current: tableParams.current,
           showQuickJumper: true,
           showSizeChanger: true,
           pageSizeOptions: ['20', '50', '100', '200', ...extraPagation],
@@ -151,8 +220,9 @@ const MyTable = forwardRef((props: TableProps, ref: RefType) => {
   );
 });
 
+MyTable.displayName = 'MyTable';
 MyTable.defaultProps = {
-  searchConfigList: [],
+  searchItemList: [],
   ref: null,
   extraProps: {},
   rowKey: 'id',

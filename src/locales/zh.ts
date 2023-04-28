@@ -12,6 +12,8 @@ const zh = {
   'page.account.enabled.false': '停用',
   'page.account.add': '新增',
   'page.account.edit': '编辑',
+
+  'component.searchform.btn.search': '查询',
 };
 
 export default zh;

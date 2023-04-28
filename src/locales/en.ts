@@ -12,6 +12,8 @@ const en = {
   'page.account.enabled.false': 'Disable',
   'page.account.add': 'Add',
   'page.account.edit': 'Edit',
+
+  'component.searchform.btn.search': 'Search',
 };
 
 export default en;
