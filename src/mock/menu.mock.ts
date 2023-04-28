@@ -64,4 +64,4 @@ const mockMenuList: MenuList = [
   },
 ];
 
-mock.mock('/api/v1/user/menu', 'get', intercepter(mockMenuList));
+mock.mock(RegExp('/api/v1/user/menu' + '.*'), 'get', intercepter(mockMenuList));
