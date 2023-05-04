@@ -18,7 +18,7 @@ const SearchForm = forwardRef((props: SearchFormProps, ref: RefType) => {
   const getFields = (): JSX.Element[] => {
     return searchItem.map((item: CommonObjectType) => {
       return (
-        <Form.Item key={item.key} name={item.key} rules={item.rules} style={item.style}>
+        <Form.Item key={item.key} name={item.key} rules={item.rules} style={{ marginBottom: '10px', ...item.style }}>
           {item.slot}
         </Form.Item>
       );

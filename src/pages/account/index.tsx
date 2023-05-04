@@ -80,10 +80,10 @@ const AccountList = () => {
       title: <FormattedMessage id="page.account.operations" />,
       dataIndex: 'operations',
       align: 'center',
-      render: () => (
+      render: (_, record) => (
         <>
           {
-            <Button ghost type="primary" onClick={edit}>
+            <Button ghost type="primary" onClick={() => edit(record)}>
               <FormattedMessage id="page.account.edit" />
             </Button>
           }
