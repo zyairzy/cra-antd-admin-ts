@@ -4,6 +4,7 @@ import MyTable from '@/components/table';
 import { getUsers } from '@/apis/user';
 import { parseTime } from '@/utils/commonUtils';
 import { FormattedMessage } from 'react-intl';
+import AccountCreateModal from './accountCreateModal';
 
 export const userStatusShow = (userStatus: boolean) => {
   if (userStatus) {
@@ -15,9 +16,18 @@ export const userStatusShow = (userStatus: boolean) => {
 
 const AccountList = () => {
   const tableRef: RefType = useRef();
+  const accountCreateModalRef: RefType = useRef();
 
   // 添加
-  const add = () => {};
+  const add = () => {
+    accountCreateModalRef.current.showModalRef();
+  };
+
+  const onCreateAccount = v => {
+    console.log(v);
+    tableRef.current.update();
+  };
+
   // 编辑
   const edit = row => {
     console.log(row);
@@ -103,6 +113,7 @@ const AccountList = () => {
         extraProps={{ results: 10 }}
         onFieldsChange={onSearchItemChange}
       />
+      <AccountCreateModal ref={accountCreateModalRef} onCreate={onCreateAccount} />
     </Card>
   );
 };

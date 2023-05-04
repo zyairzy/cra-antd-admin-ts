@@ -13,6 +13,18 @@ const zh = {
   'page.account.add': '新增',
   'page.account.edit': '编辑',
 
+  'page.account.createmodal.title': '新增账户',
+  'page.account.createmodal.btn.ok': '确定',
+  'page.account.createmodal.btn.cancel': '取消',
+  'page.account.createmodal.name': '账号名',
+  'page.account.createmodal.name.required': '请输入账号名',
+  'page.account.createmodal.password': '密码',
+  'page.account.createmodal.password.required': '请输入密码',
+  'page.account.createmodal.passwordconfirm': '确认密码',
+  'page.account.createmodal.passwordconfirm.required': '请输入确认密码',
+  'page.account.createmodal.passwordconfirm.notmatch': '两次输入的密码不相同',
+  'page.account.createmodal.success': '新增账户成功',
+
   'component.searchform.btn.search': '查询',
 };
 
