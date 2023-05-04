@@ -69,7 +69,7 @@ const LayoutPage = () => {
 
   return (
     <Layout className="layout-page">
-      <HeaderComponent collapsed={collapsed} toggle={toggle} />
+      <HeaderComponent collapsed={collapsed} toggle={toggle} breadcrumb={<BreadcrumbComponent menuList={menuList} />} />
       <Layout>
         {!isMobile ? (
           <Sider
@@ -95,7 +95,7 @@ const LayoutPage = () => {
           </Drawer>
         )}
         <Content className="layout-page-content">
-          <BreadcrumbComponent menuList={menuList} />
+          {/* <BreadcrumbComponent menuList={menuList} /> */}
           <Suspense
             fallback={
               <SuspendFallbackLoading

@@ -18,11 +18,12 @@ const { Header } = Layout;
 interface HeaderProps {
   collapsed: boolean;
   toggle: () => void;
+  breadcrumb: React.ReactNode;
 }
 
 type Action = 'userInfo' | 'userSetting' | 'logout';
 
-const HeaderComponent = ({ collapsed, toggle }: HeaderProps) => {
+const HeaderComponent = ({ collapsed, toggle, breadcrumb }: HeaderProps) => {
   const { logged, device } = { logged: true, device: 'DESKTOP' }; //TODO: get from redux
   const locale = useAppSelector(state => state.appGlobal.locale);
   const dispatch = useAppDispatch();
@@ -76,8 +77,11 @@ const HeaderComponent = ({ collapsed, toggle }: HeaderProps) => {
         </div>
       )}
       <div className="layout-page-header-main">
-        <div onClick={toggle}>
-          <span id="sidebar-trigger">{collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}</span>
+        <div className="bread">
+          <div onClick={toggle}>
+            <span id="sidebar-trigger">{collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}</span>
+          </div>
+          {breadcrumb ? breadcrumb : null}
         </div>
         <div className="actions">
           <Dropdown

@@ -1,4 +1,5 @@
 import React, { useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Button, Card, Input } from 'antd';
 import MyTable from '@/components/table';
 import { getUsers } from '@/apis/user';
@@ -17,6 +18,7 @@ export const userStatusShow = (userStatus: boolean) => {
 const AccountList = () => {
   const tableRef: RefType = useRef();
   const accountCreateModalRef: RefType = useRef();
+  const navigate = useNavigate();
 
   // 添加
   const add = () => {
@@ -31,6 +33,7 @@ const AccountList = () => {
   // 编辑
   const edit = row => {
     console.log(row);
+    navigate(`/account/edit?id=${row.id}`);
   };
 
   // 新增按钮

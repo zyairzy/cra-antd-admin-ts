@@ -1,5 +1,6 @@
 import { lazy } from 'react';
 import AccountPage from '@/pages/account';
+import AccountDetailPage from '@/pages/account/accountDetail';
 import ApplicationPage1 from '@/pages/application/App1';
 import ApplicationPage2 from '@/pages/application/App2';
 import LayoutPage from 'pages/layout';
@@ -20,7 +21,7 @@ const routeList: RouteObject[] = [
       },
       {
         path: 'account/edit',
-        element: <WrapperRouteComponent element={<ApplicationPage1 />} titleId="app1" />,
+        element: <WrapperRouteComponent element={<AccountDetailPage />} titleId="accountDetail" />,
       },
       {
         path: 'application',
