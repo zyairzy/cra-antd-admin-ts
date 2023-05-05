@@ -6,6 +6,7 @@ import { getUsers } from '@/apis/user';
 import { parseTime } from '@/utils/commonUtils';
 import { FormattedMessage } from 'react-intl';
 import AccountCreateModal from './accountCreateModal';
+import { User } from '@/interface/user';
 
 export const userStatusShow = (userStatus: boolean) => {
   if (userStatus) {
@@ -31,9 +32,9 @@ const AccountList = () => {
   };
 
   // 编辑
-  const edit = row => {
+  const edit = (row: User) => {
     console.log(row);
-    navigate(`/account/edit?id=${row.id}`);
+    navigate(`/account/edit?id=${row.id}&username=${row.username}`);
   };
 
   // 新增按钮

@@ -1,6 +1,6 @@
 import { lazy } from 'react';
 import AccountPage from '@/pages/account';
-import AccountDetailPage from '@/pages/account/accountDetail';
+import AccountDetailPage from '@/pages/account/detail';
 import ApplicationPage1 from '@/pages/application/App1';
 import ApplicationPage2 from '@/pages/application/App2';
 import LayoutPage from 'pages/layout';

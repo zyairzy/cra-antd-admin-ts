@@ -52,3 +52,19 @@ export function parseTime(time: object | string | number, cFormat?: string) {
 export function sleep(millseconds: number) {
   return new Promise(resolve => setTimeout(resolve, millseconds));
 }
+
+/**
+ * 获取地址栏url ?参数，返回键值对对象
+ */
+export const getQuery = (): CommonObjectType<string> => {
+  const { href } = window.location;
+  const query = href.split('?');
+  if (!query[1]) return {};
+
+  const queryArr = decodeURI(query[1]).split('&');
+  const queryObj = queryArr.reduce((prev, next) => {
+    const item = next.split('=');
+    return { ...prev, [item[0]]: item[1] };
+  }, {});
+  return queryObj;
+};

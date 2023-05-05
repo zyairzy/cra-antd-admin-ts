@@ -25,6 +25,22 @@ const zh = {
   'page.account.createmodal.passwordconfirm.notmatch': '两次输入的密码不相同',
   'page.account.createmodal.success': '新增账户成功',
 
+  'page.account.detail.accountInfo': '账户信息',
+  'page.account.detail.appPermission': '应用权限',
+  'page.account.detail.basicinfo.title': '基本信息',
+  'page.account.detail.id': 'ID',
+  'page.account.detail.firstname': '名',
+  'page.account.detail.lastname': '姓',
+  'page.account.detail.updatedTimestamp': '更新时间',
+  'page.account.detail.requiredAction': '登录时的必需操作',
+  'page.account.detail.validto': '有效时间至',
+  'page.account.detail.enabled': '启用',
+  'page.account.detail.templock': '临时锁定',
+  'page.account.detail.templock.unlock': '解锁',
+  'page.account.detail.lock.on': '开',
+  'page.account.detail.lock.off': '关',
+  'page.account.detail.save': '保存',
+
   'component.searchform.btn.search': '查询',
 };
 

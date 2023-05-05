@@ -25,6 +25,22 @@ const en = {
   'page.account.createmodal.passwordconfirm.notmatch': 'The two passwords that you entered do not match',
   'page.account.createmodal.success': 'Add account successfully',
 
+  'page.account.detail.accountInfo': 'Account Info',
+  'page.account.detail.appPermission': 'App Permission',
+  'page.account.detail.basicinfo.title': 'Basic Info',
+  'page.account.detail.id': 'ID',
+  'page.account.detail.firstname': 'Firstname',
+  'page.account.detail.lastname': 'Lastname',
+  'page.account.detail.updatedTimestamp': 'Updated Time',
+  'page.account.detail.requiredAction': 'Required Action',
+  'page.account.detail.validto': 'Valid To',
+  'page.account.detail.enabled': 'Enabled',
+  'page.account.detail.templock': 'Temp Lock',
+  'page.account.detail.templock.unlock': 'Unlock',
+  'page.account.detail.lock.on': 'on',
+  'page.account.detail.lock.off': 'off',
+  'page.account.detail.save': 'Save',
+
   'component.searchform.btn.search': 'Search',
 };
 
