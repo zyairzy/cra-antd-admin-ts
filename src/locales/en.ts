@@ -28,6 +28,8 @@ const en = {
   'page.account.detail.accountInfo': 'Account Info',
   'page.account.detail.appPermission': 'App Permission',
   'page.account.detail.basicinfo.title': 'Basic Info',
+  'page.account.detail.mgtPermission.title': 'Account Manage Permission',
+  'page.account.detail.resetPsw.title': 'Reset Password',
   'page.account.detail.id': 'ID',
   'page.account.detail.firstname': 'Firstname',
   'page.account.detail.lastname': 'Lastname',
@@ -40,6 +42,7 @@ const en = {
   'page.account.detail.lock.on': 'on',
   'page.account.detail.lock.off': 'off',
   'page.account.detail.save': 'Save',
+  'page.account.detail.mgt.role': 'Role',
 
   'component.searchform.btn.search': 'Search',
 };

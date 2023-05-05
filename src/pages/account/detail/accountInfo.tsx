@@ -1,13 +1,15 @@
 import { Card } from 'antd';
 import AccountBasicInfo from './accountBasicInfo';
+import AccountMgtPermission from './accountMgtPermission';
+import AccountResetPsw from './accountResetPsw';
 import './index.less';
 
 const AccountInfo = () => {
   return (
     <div className="account-info">
       <AccountBasicInfo />
-      <Card title="bbb"></Card>
-      <Card title="ccc"></Card>
+      <AccountMgtPermission />
+      <AccountResetPsw />
     </div>
   );
 };

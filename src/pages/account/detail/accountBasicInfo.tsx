@@ -10,7 +10,7 @@ const AccountBasicInfo = () => {
       <Card title={<FormattedMessage id="page.account.detail.basicinfo.title" />}>
         <Form
           form={form}
-          name="createAccount"
+          name="accountBasicInfo"
           labelCol={{ span: 8 }}
           wrapperCol={{ span: 16 }}
           scrollToFirstError

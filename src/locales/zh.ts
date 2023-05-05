@@ -28,6 +28,8 @@ const zh = {
   'page.account.detail.accountInfo': '账户信息',
   'page.account.detail.appPermission': '应用权限',
   'page.account.detail.basicinfo.title': '基本信息',
+  'page.account.detail.mgtPermission.title': '账号管理权限',
+  'page.account.detail.resetPsw.title': '重置密码',
   'page.account.detail.id': 'ID',
   'page.account.detail.firstname': '名',
   'page.account.detail.lastname': '姓',
@@ -40,6 +42,7 @@ const zh = {
   'page.account.detail.lock.on': '开',
   'page.account.detail.lock.off': '关',
   'page.account.detail.save': '保存',
+  'page.account.detail.mgt.role': '角色',
 
   'component.searchform.btn.search': '查询',
 };
