@@ -7,7 +7,7 @@ const AccountBasicInfo = () => {
 
   return (
     <div>
-      <Card title={<FormattedMessage id="page.account.detail.basicinfo.title" />}>
+      <Card bordered={false}>
         <Form
           form={form}
           name="accountBasicInfo"

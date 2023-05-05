@@ -8,7 +8,7 @@ const AccountResetPsw = () => {
   const confirmPswNotMatchText = intl.formatMessage({ id: 'page.account.createmodal.passwordconfirm.notmatch' });
   return (
     <div>
-      <Card title={<FormattedMessage id="page.account.detail.resetPsw.title" />}>
+      <Card bordered={false}>
         <Form
           form={form}
           name="resetPassword"

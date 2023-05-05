@@ -19,7 +19,7 @@ const AccountMgtPermission = () => {
 
   return (
     <div>
-      <Card title={<FormattedMessage id="page.account.detail.mgtPermission.title" />}>
+      <Card bordered={false}>
         <Form
           form={form}
           name="mgtPermission"
