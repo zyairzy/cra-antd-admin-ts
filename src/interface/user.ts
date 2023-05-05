@@ -11,13 +11,22 @@ export interface User {
   mobileNumber: string;
 }
 
+export interface UserUnlockStatus {
+  unlockStatus: boolean;
+}
+
 export interface UsersQueryParam {
-  exact: boolean;
-  search: string;
-  bizType: string;
-  roleNames: string[];
-  baseAttrsAnd: boolean;
-  current: number;
-  size: number;
-  orders: string;
+  exact?: boolean;
+  search?: string;
+  bizType?: string;
+  roleNames?: string[];
+  baseAttrsAnd?: boolean;
+  current?: number;
+  size?: number;
+  orders?: string;
+}
+
+export interface UserCreateParam {
+  username: string;
+  password: string;
 }

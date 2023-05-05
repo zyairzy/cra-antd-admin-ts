@@ -23,7 +23,7 @@ const AccountDetail = () => {
           {
             label: <FormattedMessage id="page.account.detail.accountInfo" />,
             key: 'accountInfo',
-            children: <AccountInfo />,
+            children: <AccountInfo userId={id} />,
           },
           {
             label: <FormattedMessage id="page.account.detail.appPermission" />,

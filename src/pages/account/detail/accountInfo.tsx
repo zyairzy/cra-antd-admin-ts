@@ -7,7 +7,11 @@ import './index.less';
 
 const { Panel } = Collapse;
 
-const AccountInfo = () => {
+export interface AccountInfoProps {
+  userId: string;
+}
+
+const AccountInfo = (props: AccountInfoProps) => {
   return (
     <>
       <Collapse defaultActiveKey={['1']} bordered={false} accordion className="account-info">
@@ -19,7 +23,7 @@ const AccountInfo = () => {
           }
           key="1"
         >
-          <AccountBasicInfo />
+          <AccountBasicInfo {...props} />
         </Panel>
         <Panel
           header={
@@ -39,7 +43,7 @@ const AccountInfo = () => {
           }
           key="3"
         >
-          <AccountResetPsw />
+          <AccountResetPsw {...props} />
         </Panel>
       </Collapse>
     </>

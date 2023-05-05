@@ -1,9 +1,17 @@
 import { Card, Form, Input, Button } from 'antd';
 import { FormattedMessage, useIntl } from 'react-intl';
+import { AccountInfoProps } from './accountInfo';
+import { resetUserPsw } from '@/apis/user';
 
-const AccountResetPsw = () => {
+const AccountResetPsw = (props: AccountInfoProps) => {
+  const { userId } = props;
   const [form] = Form.useForm();
   const intl = useIntl();
+
+  const resetPswHandler = async values => {
+    console.log('reset password: ', values);
+    await resetUserPsw(userId, values.password);
+  };
 
   const confirmPswNotMatchText = intl.formatMessage({ id: 'page.account.createmodal.passwordconfirm.notmatch' });
   return (
@@ -12,6 +20,7 @@ const AccountResetPsw = () => {
         <Form
           form={form}
           name="resetPassword"
+          onFinish={resetPswHandler}
           labelCol={{ span: 8 }}
           wrapperCol={{ span: 16 }}
           scrollToFirstError
